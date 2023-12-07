@@ -9,7 +9,6 @@ namespace Lab1_SQL.Model
 {
     internal class Klass
     {
-        //Show all classes
         public static void GetAllClass()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -50,10 +49,10 @@ namespace Lab1_SQL.Model
                 switch (input)
                 {
                     case 1:
-                        NETMenu();
+                        MenuSortingNet23();
                         break;
                     case 2:
-                        UXKMenu();
+                        MenuSortingUxk23();
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -70,9 +69,7 @@ namespace Lab1_SQL.Model
             }
 
         }
-
-        //Menu for ASC DESC NET23
-        public static void NETMenu()
+        public static void MenuSortingNet23()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -112,9 +109,7 @@ namespace Lab1_SQL.Model
                 Console.ResetColor();
             }
         }
-
-        //Menu for ASC DESC UXK23
-        public static void UXKMenu()
+        public static void MenuSortingUxk23()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -154,37 +149,7 @@ namespace Lab1_SQL.Model
                 Console.ResetColor();
             };
         }
-
-
-
         //Get UXK23
-        public static void GetUXK()
-        {
-            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                Console.Clear();
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand("select FirstName, LastName, KLassName from Student join Klass on Klass.KlassID = Student.KlassID where KlassName = 'UXK23'", connection))
-                {
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string firstName = reader.GetString(0);
-                            string lastName = reader.GetString(1);
-                            string className = reader.GetString(2);
-
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
-                        }
-                    }
-                }
-            }
-        }
-        //Get UXK23 firstname ascending
         public static void GetUXKFirstNameASC()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -195,7 +160,6 @@ namespace Lab1_SQL.Model
 
                 using (SqlCommand command = new SqlCommand("select FirstName, LastName, KLassName from Student join Klass on Klass.KlassID = Student.KlassID where KlassName = 'UXK23' order by FirstName", connection))
                 {
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -204,14 +168,12 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }
             }
         }
-        //Get UXK23 firstname Descending
         public static void GetUXKFirstNameDESC()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -222,7 +184,6 @@ namespace Lab1_SQL.Model
 
                 using (SqlCommand command = new SqlCommand("select FirstName, LastName, KLassName from Student join Klass on Klass.KlassID = Student.KlassID where KlassName = 'UXK23' order by FirstName DESC", connection))
                 {
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -231,14 +192,12 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }
             }
         }
-        //Get UXK23 LastName ascending
         public static void GetUXKLastNameASC()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -249,7 +208,6 @@ namespace Lab1_SQL.Model
 
                 using (SqlCommand command = new SqlCommand("select FirstName, LastName, KLassName from Student join Klass on Klass.KlassID = Student.KlassID where KlassName = 'UXK23' order by LastName", connection))
                 {
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -258,14 +216,12 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }
             }
         }
-        //Get UXK23 LastName Descending
         public static void GetUXKLastNameDESC()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -276,7 +232,6 @@ namespace Lab1_SQL.Model
 
                 using (SqlCommand command = new SqlCommand("select FirstName, LastName, KLassName from Student join Klass on Klass.KlassID = Student.KlassID where KlassName = 'UXK23' order by LastName DESC", connection))
                 {
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -285,42 +240,13 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }
             }
         }
-
         //Get NET23
-        public static void GetNET()
-        {
-            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                Console.Clear();
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand("select FirstName, LastName, KLassName from Student join Klass on Klass.KlassID = Student.KlassID where KlassName = 'NET23'", connection))
-                {
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string firstName = reader.GetString(0);
-                            string lastName = reader.GetString(1);
-                            string className = reader.GetString(2);
-
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
-                        }
-                    }
-                }
-            }
-        }
-        //Get NET23 firstname ascending
         public static void GetNETFirstNameASC()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -331,7 +257,6 @@ namespace Lab1_SQL.Model
 
                 using (SqlCommand command = new SqlCommand("select FirstName, LastName, KLassName from Student join Klass on Klass.KlassID = Student.KlassID where KlassName = 'NET23' order by FirstName", connection))
                 {
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -340,14 +265,12 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }
             }
         }
-        //Get NET23 firstname Descending
         public static void GetNETFirstNameDESC()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -358,7 +281,6 @@ namespace Lab1_SQL.Model
 
                 using (SqlCommand command = new SqlCommand("select FirstName, LastName, KLassName from Student join Klass on Klass.KlassID = Student.KlassID where KlassName = 'NET23' order by FirstName DESC", connection))
                 {
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -367,14 +289,12 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }
             }
         }
-        //Get NET23 lastname ascending
         public static void GetNETLastNameASC()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -382,10 +302,8 @@ namespace Lab1_SQL.Model
             {
                 Console.Clear();
                 connection.Open();
-
                 using (SqlCommand command = new SqlCommand("select FirstName, LastName, KLassName from Student join Klass on Klass.KlassID = Student.KlassID where KlassName = 'NET23' order by LastName", connection))
                 {
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -394,14 +312,12 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }
             }
         }
-        //Get NET23 lastname Descending
         public static void GetNETLastNameDESC()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -412,7 +328,6 @@ namespace Lab1_SQL.Model
 
                 using (SqlCommand command = new SqlCommand("select FirstName, LastName, KLassName from Student join Klass on Klass.KlassID = Student.KlassID where KlassName = 'NET23' order by LastName DESC", connection))
                 {
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -421,8 +336,7 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }

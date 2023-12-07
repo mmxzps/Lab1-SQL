@@ -9,43 +9,6 @@ namespace Lab1_SQL.Model
 {
     internal class Students
     {
-        public static void GetAllStudents()
-        {
-            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                Console.Clear();
-                // LET THE USER NAVIGATE WITH NUMBERS AND PROVIDE A READY-TO-USE CODE. SAFER AGAINST INJECTION OR WITH STORED PROCEDURES.
-                connection.Open();
-                Console.Write("Sort by [LastName] or [FirstName]: ");
-                string FLOrder = Console.ReadLine();
-                Console.Write("Decide the order [ASC] or [Desc]: ");
-                string ADOrder = Console.ReadLine();
-
-                // Building the SQL query dynamically based on user input
-                string sqlQuery = $"SELECT FirstName, LastName, KlassName FROM Student JOIN Klass ON Klass.KlassID = Student.KlassID ORDER BY " +
-                                  $"CASE WHEN @SortOrder = 'LastName' THEN LastName END {ADOrder}, CASE WHEN @SortOrder = 'FirstName' THEN FirstName END {ADOrder}";
-
-                using (SqlCommand command = new SqlCommand(sqlQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@SortOrder", FLOrder);
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string firstName = reader.GetString(0);
-                            string lastName = reader.GetString(1);
-                            string className = reader.GetString(2);
-
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-                        }
-                        Console.ReadKey();
-                        Menu.MainMenu();
-                    }
-                }
-            }
-        }
         public static void GetStudentsMenu()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -60,13 +23,13 @@ namespace Lab1_SQL.Model
                 switch (input)
                 {
                     case 1:
-                        GetFirstName();
+                        GetFirstNameAsc();
                         break;
                     case 2:
                         GetFirstNameDesc();
                         break;
                     case 3:
-                        GetLastName();
+                        GetLastNameAsc();
                         break;
                     case 4:
                         GetLastNameDesc();
@@ -84,10 +47,8 @@ namespace Lab1_SQL.Model
                 Console.WriteLine("Invalid input!");
                 Console.ResetColor();
             };
-
         }
-        //Get with firstname ascending
-        public static void GetFirstName()
+        public static void GetFirstNameAsc()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -106,14 +67,13 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
 
                         }
                     }
                 }
             }
         }
-        //Get with firstname descending
         public static void GetFirstNameDesc()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -121,10 +81,8 @@ namespace Lab1_SQL.Model
             {
                 Console.Clear();
                 connection.Open();
-
                 using (SqlCommand command = new SqlCommand("SELECT FirstName, LastName, KlassName FROM Student JOIN Klass ON Klass.KlassID = Student.KlassID ORDER BY FirstName DESC", connection))
                 {
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -133,25 +91,21 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }
             }
         }
-        //Get with LastName ascending
-        public static void GetLastName()
+        public static void GetLastNameAsc()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 Console.Clear();
                 connection.Open();
-
                 using (SqlCommand command = new SqlCommand("SELECT FirstName, LastName, KlassName FROM Student JOIN Klass ON Klass.KlassID = Student.KlassID ORDER BY LastName", connection))
                 {
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -160,14 +114,12 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }
             }
         }
-        //Get with LastName descending
         public static void GetLastNameDesc()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
@@ -175,7 +127,6 @@ namespace Lab1_SQL.Model
             {
                 Console.Clear();
                 connection.Open();
-
                 using (SqlCommand command = new SqlCommand("SELECT FirstName, LastName, KlassName FROM Student JOIN Klass ON Klass.KlassID = Student.KlassID ORDER BY LastName DESC", connection))
                 {
 
@@ -187,17 +138,14 @@ namespace Lab1_SQL.Model
                             string lastName = reader.GetString(1);
                             string className = reader.GetString(2);
 
-                            Console.WriteLine($"Name: {firstName} {lastName}, Class: {className}");
-
+                            Console.WriteLine($"Name: {firstName} {lastName} \t\tClass: {className}");
                         }
                     }
                 }
             }
         }
-        //Adding student
         public static void AddStudent()
         {
-            //Connect to the database.
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=School;Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -220,17 +168,13 @@ namespace Lab1_SQL.Model
                 {
                     Console.WriteLine("Invalid input. Enter ID 1-2.");
                 }
-                //Storing the SQL command into sql in a seprate variable.
                 string sql = "INSERT INTO Student(FirstName, LastName, KlassID) VALUES (@FirstName, @LastName, @KlassID)";
-                //adding sql here.
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    // Add parameters to the command.
                     command.Parameters.AddWithValue("@FirstName", firstName);
                     command.Parameters.AddWithValue("@LastName", lastName);
                     command.Parameters.AddWithValue("@KlassID", KlassID);
 
-                    //Execute the query.
                     command.ExecuteNonQuery();
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"{firstName} were added to Student successfully.");
