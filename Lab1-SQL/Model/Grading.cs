@@ -24,7 +24,7 @@ namespace Lab1_SQL.Model
                     "JOIN Student ON Student.StudentId = FinalGrade.StudentId " +
                     "JOIN Course ON Course.CourseId = FinalGrade.CourseId " +
                     "JOIN Grading ON Grading.GradeId = FinalGrade.GradeId " +
-                    "WHERE GradeDate <= DATEADD(day, -30, GETDATE())";
+                    "WHERE GradeDate <= DATEADD(month, -1, GETDATE())";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
